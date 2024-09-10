@@ -23,12 +23,11 @@ export class ProductComponent implements OnInit {
     }
     );
   }
-}
+
 
   delete(product: Product){
     this.service.delete(product).subscribe({
       next: ()=> this.loadProducts()
     })
   }
-
 }

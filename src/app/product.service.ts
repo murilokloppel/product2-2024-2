@@ -8,16 +8,16 @@ import { Product } from './product';
 })
 export class ProductService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product []>{
-return this.http.get<Product []>('http://localhost:3000/products');
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products');
+  }
+
+
+  delete(product: Product): Observable<void> {
+    return this.http.delete<void>('http://localhost:3000/products/' + product.id);
   }
 }
-
-delete(product:Product) observable<Void>{
-  return this.http.delete<void>('http://localhost:3000/products' + ProductService.id);
- })
-  
 
 
