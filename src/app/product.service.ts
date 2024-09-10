@@ -14,3 +14,10 @@ export class ProductService {
 return this.http.get<Product []>('http://localhost:3000/products');
   }
 }
+
+delete(product:Product) observable<Void>{
+  return this.http.delete<void>('http://localhost:3000/products' + ProductService.id);
+ })
+  
+
+
