@@ -1,6 +1,5 @@
 {
-  
-    "products" : [
+      "products" : [
 
       {   "id": 1,
           "name": "ComputadosI7",
@@ -19,6 +18,5 @@
           "price": 33.45,
           "category": "Alimentos" 
       }
-    
   ]
 }
