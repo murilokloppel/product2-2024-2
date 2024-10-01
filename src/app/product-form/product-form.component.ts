@@ -1,6 +1,7 @@
 import { Component, numberAttribute, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -9,22 +10,43 @@ import { ProductService } from '../product.service';
 })
 
 export class ProductFormComponent implements OnInit {
+  
+  formGroupProduct: FormGroup;
+  isEditing: boolean = false;
 
-  constructor(private router: Router
-              private activeRoute: ActivatedRoute
-              private service: ProductService
-    ){
-
+  constructor(private router: Router,
+              private activeRouter: ActivatedRoute,
+              private service: ProductService,
+              private formBuilder: FormBuilder
+    ){      this.formGroupProduct = formBuilder.group({
+        id       : [''],
+        name     : [''],
+        price    : [''],
+        category : ['']
+      })
   }
 
   ngOnInit() {
-    const id = Number(this.router.snapshot.paramMap.get("id"))
+    const id = Number(this.activeRouter.snapshot.paramMap.get("id"));
+    if(id != 0){
+    this.isEditing=true
     this.loadProduct(id);
-  }
+    }};
 
   loadProduct(id: number) {
        this.service.getProductById(id).subscribe({
-        next: data => alert(data.name)
+        next: data => this.formGroupProduct.setValue(data)
        })
+  
+  };
+  update(){
+    this.service.update(this.formGroupProduct.value).subscribe({
+      next: () => this.router.navigate(['products'])
+    })
+  }
+  save(){
+    this.service.save(this.formGroupProduct.value).subscribe({
+      next: () => this.router.navigate(['products'])
+    });
   }
 }

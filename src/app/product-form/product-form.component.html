@@ -1,18 +1,43 @@
 <div class="container">
-    <h1>Sistema FATEC</h1>
-    <form>
+    <h1>Cadastro de Produto</h1>
+    <form [formGroup]="formGroupProduct">
         <div class="mb-3">
             <label for="name" class="form-label"> Nome</label>
-            <input type="text" class="form-control" id="name" placeholder="Digite o teu nome...">
+            <input 
+            formControlName="name" 
+            type="text"
+            class="form-control" 
+            id="name" 
+            placeholder="Digite o nome do Produto..."> 
           </div>
           <div class="mb-3">
             <label for="price" class="form-label"> Preço</label>
-            <input type="text" class="form-control" id="price" placeholder="Digite o preço...">
+            <input 
+            formControlName="category" 
+            type="text" 
+            class="form-control" 
+            id="price" 
+            placeholder="Digite o preço...">
           </div>
           <div class="mb-3">
             <label for="category" class="form-label"> Categoria</label>
-            <input type="text" class="form-control" id="category" placeholder="Digite a categoria...">
+            <input 
+            formControlName="category" 
+            type="text" 
+            class="form-control" 
+            id="category" 
+            placeholder="Digite a categoria...">
           </div>
-          <button type="button" class="btn btn-primary">Salvar</button>
+
+          <button *ngIf="isEditing" type="button" 
+          class="btn btn-primary"
+          (click)="update()"
+          >Salvar</button>
+
+          <button *ngIf="!isEditing" type="button" 
+          class="btn btn-primary"
+          (click)="save()"
+          >Criar</button>
     </form>
+
 </div>
